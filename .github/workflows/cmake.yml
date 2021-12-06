@@ -41,5 +41,5 @@ jobs:
       uses: jidicula/clang-format-action@v4.4.0
       with:
         clang-format-version: '13'
-        check-path: '.'
+        check-path: 'src'
         fallback-style: 'Mozilla' # optional

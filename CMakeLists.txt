@@ -3,5 +3,5 @@ project(harry_pointer C)
 
 set(CMAKE_C_STANDARD 99)
 
-file(GLOB SRC_FILES *.c)
+file(GLOB SRC_FILES ./src/*.c)
 add_executable(harry_pointer ${SRC_FILES})
