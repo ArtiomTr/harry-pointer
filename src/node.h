@@ -1,8 +1,6 @@
 #ifndef HARRY_POINTER_NODE_H
 #define HARRY_POINTER_NODE_H
 
-#include "element.h"
-
 // Kind of node describes how it should be rendered.
 typedef enum {
     // Node should be rendered as tag, e.g. div -> <div></div>
