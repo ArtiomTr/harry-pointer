@@ -30,7 +30,7 @@ typedef struct HPNode {
 } HPNode;
 
 // The element is function, that takes properties and returns HPNode*
-typedef HPNode *(*HPElement)(void *props, ...);
+typedef HPNode *(*HPElement)(void *props, HPChildren children);
 
 HPNode *createHPNodeImpl(HPElement element, void *props, ...);
 
