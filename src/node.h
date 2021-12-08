@@ -2,7 +2,8 @@
 #define HARRY_POINTER_NODE_H
 
 // Kind of node describes how it should be rendered.
-typedef enum {
+typedef enum
+{
     // Node should be rendered as tag, e.g. div -> <div></div>
     HP_TAG,
     // Node should be rendered as string
