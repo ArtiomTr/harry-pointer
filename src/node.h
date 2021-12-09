@@ -1,6 +1,8 @@
 #ifndef HARRY_POINTER_NODE_H
 #define HARRY_POINTER_NODE_H
 
+#include "utils.h"
+
 // Kind of node describes how it should be rendered.
 typedef enum
 {
@@ -32,9 +34,9 @@ typedef struct HPNode {
 // The element is function, that takes properties and returns HPNode*
 typedef HPNode *(*HPElement)(void *props, HPChildren children);
 
-HPNode *createHPNodeImpl(HPElement element, void *props, ...);
+HPNode *createHPNodeImpl(HPElement element, void *props, HPChildren);
 
 #define createHPNode(element, propType, props, children...)                                                            \
-    createHPNodeImpl(element, &((propType) props), children, NULL)
+    createHPNodeImpl(element, &((propType) props), parseChildren(children, NULL))
 
 #endif
