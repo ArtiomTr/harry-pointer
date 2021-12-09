@@ -1,8 +1,6 @@
 #ifndef HARRY_POINTER_NODE_H
 #define HARRY_POINTER_NODE_H
 
-#include "utils.h"
-
 // Kind of node describes how it should be rendered.
 typedef enum
 {

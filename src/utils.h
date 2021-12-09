@@ -6,6 +6,6 @@
 #include "node.h"
 
 // Function which accumulates given nodes into single HPChildren structure
-HPChildren parseChildren(HPNode node, ...);
+HPChildren parseChildren(HPNode *node, ...);
 
 #endif
