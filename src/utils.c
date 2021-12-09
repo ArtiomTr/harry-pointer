@@ -5,7 +5,6 @@
 HPChildren parseChildren(HPNode *node, ...) {
     HPNode nodes[1000];
     int count = 0;
-    int count = 10;
     va_list nodeList;
     va_start(nodeList, node);
 
@@ -13,5 +12,10 @@ HPChildren parseChildren(HPNode *node, ...) {
         nodes[count] = *i;
         count++;
     }
-    calloc(count, sizeof(HPNode));
+    HPNode *nodesArray = calloc(count, sizeof(HPNode));
+    for(int i = 0; i < count; i++) {
+        nodesArray[i] = nodes[i];
+    }
+    HPChildren children = {.count = count, .elements = nodesArray};
+    return children;
 }
