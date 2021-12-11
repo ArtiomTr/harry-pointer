@@ -1,15 +1,10 @@
-#include "input.h"
-#include <stdio.h>
-
+#include "createHPNode.h"
+#include "htmlDiv.h"
+#include <stdlib.h>
 
 int main() {
-    ShopInfo sInfo = readUserInput(stdin);
-    printf("%s\n", sInfo.shopTitle);
-    printf("%d\n", sInfo.productCount);
-    for(int i = 0; i < sInfo.productCount; ++i) {
-        printf("%s  ", sInfo.products[i].title);
-        printf("%d\n", sInfo.products[i].price);
-    }
+    createHPNode(htmlDiv, ((HtmlDivProps){.class = "hello", .style = "asdf"}), NULL);
+
 
     return 0;
 }

@@ -1,6 +1,8 @@
 #include "utils.h"
-#include "node.h"
-#include "stdlib.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 HPChildren parseChildren(HPNode *node, ...) {
     HPNode nodes[1000];
@@ -18,4 +20,18 @@ HPChildren parseChildren(HPNode *node, ...) {
     }
     HPChildren children = {.count = count, .elements = nodesArray};
     return children;
+}
+
+void stringifyAttributeMap(char *input, HPAttributeMap map) {
+    for(int i = 0; i < map.size; ++i) {
+        strcat(input, map.keys[i]);
+        strcat(input, "=\"");
+        // TODO: value should be escaped to prevent errors.
+        strcat(input, map.values[i]);
+        strcat(input, "\"");
+
+        if(i != map.size - 1) {
+            strcat(input, " ");
+        }
+    }
 }
