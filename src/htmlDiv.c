@@ -1,6 +1,6 @@
 #include "htmlDiv.h"
 
-HPNode hpHtmlDiv(HtmlDivProps *_options, ...) {
+HPNode hpHtmlDiv(HtmlDivProps *options, HPChildren children) {
 }
 
 HPElement htmlDiv = (HPElement) hpHtmlDiv;
