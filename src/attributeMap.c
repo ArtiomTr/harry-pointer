@@ -46,6 +46,10 @@ void hpUpdate(HPAttributeMap *map, char **oldValue, char *value) {
 }
 
 void hpSet(HPAttributeMap *map, char *key, char *value) {
+    if(value == NULL || key == NULL) {
+        return;
+    }
+
     char **existingValue = hpGet(map, key);
 
     if(existingValue == NULL) {

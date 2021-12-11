@@ -5,10 +5,10 @@
 #include "utils.h"
 
 HPNode *hpHtmlDiv(HtmlDivProps *options, HPChildren children) {
-    HPAttributeMap map = hpCreateAttributeMap();
+    HPAttributeMap attributes = hpCreateAttributeMap();
 
-    hpSet(&map, "class", options->class);
-    hpSet(&map, "style", options->style);
+    hpSet(&attributes, "class", options->class);
+    hpSet(&attributes, "style", options->style);
 
     HPNode *node = malloc(sizeof(HPNode));
 
@@ -16,6 +16,7 @@ HPNode *hpHtmlDiv(HtmlDivProps *options, HPChildren children) {
             .name = "div",
             .children = children,
             .kind = HP_TAG,
+            .attributes = attributes,
     };
 
     return node;
