@@ -14,7 +14,7 @@ int renderToFile(FILE *output, HPNode *node) {
 
         fprintf(output, "</%s>\n", node->name);
     } else {
-        // TODO: implement this
+        fprintf(output, "%s\n", hpGetValue(&(node->attributes), "value"));
     }
 
     return 0;

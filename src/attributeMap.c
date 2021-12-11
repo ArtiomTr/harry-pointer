@@ -23,6 +23,16 @@ char **hpGet(HPAttributeMap *map, char *key) {
     return NULL;
 }
 
+char *hpGetValue(HPAttributeMap *map, char *key) {
+    char **offset = hpGet(map, key);
+
+    if(offset == NULL) {
+        return NULL;
+    }
+
+    return *offset;
+}
+
 void hpPush(HPAttributeMap *map, char *key, char *value) {
     if(map->capacity < map->size + 1) {
         int newCapacity = map->capacity == 0 ? 1 : map->capacity * 2;
