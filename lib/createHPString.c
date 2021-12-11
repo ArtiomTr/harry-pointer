@@ -2,10 +2,10 @@
 
 #include <stdlib.h>
 
-HPNode *createHPString(char *value) {
+HPNode *createHPString(const char *value) {
     HPAttributeMap attributes = hpCreateAttributeMap();
 
-    hpSet(&attributes, "value", value);
+    hpSet(&attributes, "value", (char *) value);
 
     HPNode *node = malloc(sizeof(HPNode));
 

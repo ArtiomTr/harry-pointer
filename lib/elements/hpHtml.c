@@ -1,19 +1,16 @@
-#include "htmlDiv.h"
+#include "hpHtml.h"
 
 #include <stdlib.h>
 
-#include "utils.h"
-
-HPNode *hpHtmlDiv(HtmlDivProps *options, HPChildren children) {
+HPNode *rawHpHtml(HpHtmlProps *props, HPChildren children) {
     HPAttributeMap attributes = hpCreateAttributeMap();
 
-    hpSet(&attributes, "class", options->class);
-    hpSet(&attributes, "style", options->style);
+    hpSet(&attributes, "lang", props->lang);
 
     HPNode *node = malloc(sizeof(HPNode));
 
     *node = (HPNode){
-            .name = "div",
+            .name = "html",
             .children = children,
             .kind = HP_TAG,
             .attributes = attributes,
@@ -22,4 +19,4 @@ HPNode *hpHtmlDiv(HtmlDivProps *options, HPChildren children) {
     return node;
 }
 
-HPElement htmlDiv = (HPElement) hpHtmlDiv;
+HPElement hpHtml = (HPElement) rawHpHtml;

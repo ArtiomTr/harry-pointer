@@ -1,17 +1,22 @@
-#include "createHPNode.h"
-#include "createHPString.h"
-#include "htmlDiv.h"
-#include "renderer.h"
+#include "hp.h"
+
 #include <stdlib.h>
 
+#include "app.h"
+#include "input.h"
+
 int main() {
+    ShopInfo info = readUserInput(stdin);
     FILE *out = fopen("index.html", "w");
 
     renderToFile(out,
-                 createHPNode(htmlDiv,
-                              ((HtmlDivProps){.class = "hello", .style = "asdf"}),
-                              createHPNode(htmlDiv, ((HtmlDivProps){.class = "asdf"}), NULL),
-                              createHPNode(htmlDiv, ((HtmlDivProps){}), createHPString("Some string"))));
+                 createHPNode(App,
+                              ((AppProps){
+                                      .shopTitle = info.shopTitle,
+                                      .productCount = info.productCount,
+                                      .products = info.products,
+                              }),
+                              NULL));
 
     fclose(out);
 
