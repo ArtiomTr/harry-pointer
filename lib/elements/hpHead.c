@@ -1,12 +1,12 @@
-#include "hpBody.h"
+#include "hpHead.h"
 
 #include <stdlib.h>
 
-HPNode *rawHpBody(HpBodyProps *options, HPChildren children) {
+HPNode *rawHpHead(HpHeadProps *props, HPChildren children) {
     HPNode *node = malloc(sizeof(HPNode));
 
     *node = (HPNode){
-            .name = "body",
+            .name = "head",
             .children = children,
             .kind = HP_TAG,
             .attributes = hpCreateAttributeMap(),
@@ -15,4 +15,4 @@ HPNode *rawHpBody(HpBodyProps *options, HPChildren children) {
     return node;
 }
 
-HPElement hpBody = (HPElement) rawHpBody;
+HPElement hpHead = (HPElement) rawHpHead;

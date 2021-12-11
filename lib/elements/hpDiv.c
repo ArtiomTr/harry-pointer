@@ -2,13 +2,13 @@
 
 #include <stdlib.h>
 
-#include "utils.h"
+#include "../utils.h"
 
-HPNode *rawHpDiv(HpDivProps *options, HPChildren children) {
+HPNode *rawHpDiv(HpDivProps *props, HPChildren children) {
     HPAttributeMap attributes = hpCreateAttributeMap();
 
-    hpSet(&attributes, "class", options->class);
-    hpSet(&attributes, "style", options->style);
+    hpSet(&attributes, "class", props->class);
+    hpSet(&attributes, "style", props->style);
 
     HPNode *node = malloc(sizeof(HPNode));
 

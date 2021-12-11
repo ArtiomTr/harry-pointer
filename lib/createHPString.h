@@ -3,6 +3,6 @@
 
 #include "node.h"
 
-HPNode *createHPString(char *value);
+HPNode *createHPString(const char *value);
 
 #endif

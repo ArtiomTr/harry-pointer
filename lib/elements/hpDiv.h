@@ -1,7 +1,7 @@
-#ifndef HARRY_POINTER_DIV_H
-#define HARRY_POINTER_DIV_H
+#ifndef HARRY_POINTER_ELEMENT_DIV_H
+#define HARRY_POINTER_ELEMENT_DIV_H
 
-#include "node.h"
+#include "../node.h"
 
 typedef struct {
     char *class;

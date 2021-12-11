@@ -1,18 +1,18 @@
-#include "hpTitle.h"
+#include "hpStyle.h"
 
 #include <stdlib.h>
 
-HPNode *rawHpTitle(HpTitleProps *options, HPChildren children) {
+HPNode *rawHpStyle(HpStyleProps *props, HPChildren children) {
     HPNode *node = malloc(sizeof(HPNode));
 
     *node = (HPNode){
-            .name = "meta",
-            .children = children,
+            .name = "style",
             .kind = HP_TAG,
+            .children = children,
             .attributes = hpCreateAttributeMap(),
     };
 
     return node;
 }
 
-HPElement hpTitle = (HPElement) rawHpTitle;
+HPElement hpStyle = (HPElement) rawHpStyle;

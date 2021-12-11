@@ -6,11 +6,15 @@
 #include "node.h"
 #include "renderer.h"
 
-#include "hpBody.h"
-#include "hpDiv.h"
-#include "hpHead.h"
-#include "hpHtml.h"
-#include "hpMeta.h"
-#include "hpTitle.h"
+#include "elements/hpBody.h"
+#include "elements/hpDiv.h"
+#include "elements/hpHead.h"
+#include "elements/hpHeader.h"
+#include "elements/hpHtml.h"
+#include "elements/hpLink.h"
+#include "elements/hpMain.h"
+#include "elements/hpMeta.h"
+#include "elements/hpStyle.h"
+#include "elements/hpTitle.h"
 
 #endif

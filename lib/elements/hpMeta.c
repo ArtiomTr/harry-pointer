@@ -2,12 +2,12 @@
 
 #include <stdlib.h>
 
-HPNode *rawHpMeta(HpMetaProps *options, HPChildren children) {
+HPNode *rawHpMeta(HpMetaProps *props, HPChildren children) {
     HPNode *node = malloc(sizeof(HPNode));
 
     HPAttributeMap attributes = hpCreateAttributeMap();
 
-    hpSet(&attributes, "charset", options->charset);
+    hpSet(&attributes, "charset", props->charset);
 
     *node = (HPNode){
             .name = "meta",

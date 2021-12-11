@@ -2,10 +2,10 @@
 
 #include <stdlib.h>
 
-HPNode *rawHpHtml(HpHtmlProps *options, HPChildren children) {
+HPNode *rawHpHtml(HpHtmlProps *props, HPChildren children) {
     HPAttributeMap attributes = hpCreateAttributeMap();
 
-    hpSet(&attributes, "lang", options->lang);
+    hpSet(&attributes, "lang", props->lang);
 
     HPNode *node = malloc(sizeof(HPNode));
 
