@@ -6,7 +6,6 @@
 
 HPNode *createHPNodeImpl(HPElement element, void *props, HPChildren);
 
-#define createHPNode(element, propType, props, children...)                                                            \
-    createHPNodeImpl(element, &((propType) props), parseChildren(children, NULL))
+#define createHPNode(element, props, children...) createHPNodeImpl(element, &(props), parseChildren(children, NULL))
 
 #endif

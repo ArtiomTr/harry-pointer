@@ -4,7 +4,8 @@
 #include "node.h"
 
 typedef struct {
-
+    char *class;
+    char *style;
 } HtmlDivProps;
 
 extern HPElement htmlDiv;

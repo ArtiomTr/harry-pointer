@@ -1,6 +1,8 @@
 #ifndef HARRY_POINTER_NODE_H
 #define HARRY_POINTER_NODE_H
 
+#include "attributeMap.h"
+
 // Kind of node describes how it should be rendered.
 typedef enum
 {
@@ -27,6 +29,8 @@ typedef struct HPNode {
     HPNodeKind kind;
     // The children of node.
     HPChildren children;
+    // Store attributes of html element.
+    HPAttributeMap attributes;
 } HPNode;
 
 // The element is function, that takes properties and returns HPNode*
