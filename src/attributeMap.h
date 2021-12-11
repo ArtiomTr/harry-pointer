@@ -10,5 +10,6 @@ typedef struct {
 
 HPAttributeMap hpCreateAttributeMap();
 void hpSet(HPAttributeMap *map, char *key, char *value);
+char *hpGetValue(HPAttributeMap *map, char *key);
 
 #endif
