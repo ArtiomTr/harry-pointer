@@ -1,0 +1,8 @@
+Tested on Windows 10
+
+gcc version 11.2.0 (Rev1, Built by MSYS2 project)
+cmake version 3.22.0 (Should work with >= 3.20.0)
+GNU Make 4.3
+
+Program compiled for windows is in bin directory
+Compilation instructions in compile.txt
