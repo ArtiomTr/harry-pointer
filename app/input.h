@@ -10,6 +10,8 @@ typedef struct {
 
 typedef struct {
     char *shopTitle;
+    char *contactPhone;
+    char *contactEmail;
     int productCount;
     Product *products;
 } ShopInfo;
