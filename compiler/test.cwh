@@ -1,0 +1,4 @@
+int main() {
+
+    return (<div>Hello world!</div>);
+}

@@ -3,6 +3,7 @@ project(harry_pointer C)
 
 set(CMAKE_C_STANDARD 99)
 add_subdirectory(lib)
+add_subdirectory(compiler)
 
 file(GLOB SRC_FILES src/*.c)
 add_executable(shop ${SRC_FILES})
