@@ -1,4 +1,4 @@
 int main() {
-
+    char *helo = "</div>";
     return (<div>Hello world!</div>);
 }

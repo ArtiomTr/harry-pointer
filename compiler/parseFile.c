@@ -2,18 +2,15 @@
 
 #include <ctype.h>
 #include <stdbool.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "dynamicArray.h"
 #include "stack.h"
 
 #define BUFFER_SIZE 1024
 #define OFFSET_SIZE 32
-
-bool isTagCharacter(int character) {
-    return isalnum(character) || isspace(character);
-}
+#define MAX_SAVED_BUFFER_LENGTH 1024
 
 typedef struct {
     Stack tagStack;
@@ -27,6 +24,9 @@ typedef struct {
 
     long line;
     long column;
+
+    int braceLevel;
+    char *savedBuffer;
 } ParserState;
 
 const char *processString(ParserState *state, const char *currentPtr) {
@@ -90,14 +90,7 @@ const char *processCharacter(ParserState *state, const char *currentPtr) {
     return currentPtr + 2;
 }
 
-const char whitespaceCharacters[] = {
-        ' ',
-        '\n',
-        '\t',
-        '\r',
-        '\v',
-        '\f'
-};
+const char whitespaceCharacters[] = {' ', '\n', '\t', '\r', '\v', '\f'};
 
 void trimString(char *string) {
     size_t begin = strspn(string, whitespaceCharacters);
@@ -116,7 +109,10 @@ void trimString(char *string) {
     if(begin < end && begin != 0) {
         strncpy(string, string + begin, end - begin + 1);
     }
+}
 
+const char *processOpeningTag(ParserState *state, const char *currentPtr) {
+    while(currentPtr)
 }
 
 const char *processClosingTag(ParserState *state, const char *currentPtr) {
@@ -127,16 +123,63 @@ const char *processClosingTag(ParserState *state, const char *currentPtr) {
         exit(1);
     }
 
+    while(currentPtr[0] != '\0' && isspace(currentPtr[0]))
+        currentPtr += 1;
+
     const char *beginPtr = currentPtr;
 
-    while(beginPtr[0] != '\0' && isspace(beginPtr[0]))
-        beginPtr += 1;
+    while(currentPtr[0] != '\0' && isalnum(currentPtr[0]))
+        currentPtr += 1;
 
-    const char *endPtr = beginPtr;
+    if(strlen(state->savedBuffer) + (currentPtr - beginPtr) >= MAX_SAVED_BUFFER_LENGTH) {
+        fprintf(stderr, "Tag name is too long: line %ld, column %ld\n", state->line, state->column);
+        exit(1);
+    }
 
-    while(endPtr[0] != '\0' && isalnum(endPtr[0]))
-        endPtr += 1;
+    if(currentPtr[0] == '\0') {
+        strcat(state->savedBuffer, beginPtr);
 
+        return currentPtr;
+    } else {
+        const char *endPtr = currentPtr;
+
+        while(isspace(currentPtr[0]))
+            currentPtr += 1;
+
+        if(currentPtr[0] != '>') {
+            fprintf(stderr, "Invalid closing tag syntax on line %ld column %ld", state->line, state->column);
+        }
+
+        strncat(state->savedBuffer, beginPtr, endPtr - currentPtr);
+
+        if(strcmp(state->savedBuffer, info->tagName) != 0) {
+            fprintf(stderr,
+                    "Closing tag \"%s\" (line %ld, column %ld) does not match opening tag \"%s\" (line %ld, column "
+                    "%ld).",
+                    state->savedBuffer,
+                    state->line,
+                    state->column,
+                    info->tagName,
+                    info->beginLine,
+                    info->beginLine);
+            exit(1);
+        }
+
+        popFromStack(&state->tagStack);
+        info->endColumn = state->column;
+        info->endLine = state->line;
+
+        TagInfo *parent = stackFront(&state->tagStack);
+
+        if(parent != NULL) {
+            pushToDynamicArray(&parent->children, info);
+        }
+
+        pushToDynamicArray(&state->parsedTags, info);
+        memset(state->savedBuffer, '\0', MAX_SAVED_BUFFER_LENGTH + 1);
+
+        return currentPtr + 1;
+    }
 }
 
 const char *processGeneral(ParserState *state, const char *currentPtr) {
@@ -189,7 +232,7 @@ void processBuffer(ParserState *state, const char *buffer) {
     const char *currentPtr = buffer;
 
     while(currentPtr != NULL && (currentPtr - buffer) < BUFFER_SIZE && currentPtr[0] != '\0') {
-        const char* (*process)(ParserState *state, const char *buffer);
+        const char *(*process)(ParserState * state, const char *buffer);
 
         if(state->inString) {
             process = processString;
@@ -251,6 +294,7 @@ void parseFile(FILE *input) {
             .inString = false,
             .line = 1,
             .column = 0,
+            .braceLevel = 0,
     };
 
     char buffer[BUFFER_SIZE + 1];
