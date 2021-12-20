@@ -6,8 +6,10 @@
 #include "node.h"
 #include "renderer.h"
 
+#include "elements/hpA.h"
 #include "elements/hpBody.h"
 #include "elements/hpDiv.h"
+#include "elements/hpFooter.h"
 #include "elements/hpHead.h"
 #include "elements/hpHeader.h"
 #include "elements/hpHtml.h"

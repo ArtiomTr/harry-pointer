@@ -1,8 +1,8 @@
-#include "hpDiv.h"
+#include "hpFooter.h"
 
 #include <stdlib.h>
 
-HPNode *rawHpDiv(HpDivProps *props, HPChildren children) {
+HPNode *rawHpFooter(HpFooterProps *props, HPChildren children) {
     HPAttributeMap attributes = hpCreateAttributeMap();
 
     hpSet(&attributes, "class", props->class);
@@ -11,13 +11,13 @@ HPNode *rawHpDiv(HpDivProps *props, HPChildren children) {
     HPNode *node = malloc(sizeof(HPNode));
 
     *node = (HPNode){
-            .name = "div",
-            .children = children,
+            .name = "footer",
             .kind = HP_TAG,
             .attributes = attributes,
+            .children = children,
     };
 
     return node;
 }
 
-HPElement hpDiv = (HPElement) rawHpDiv;
+HPElement hpFooter = (HPElement) rawHpFooter;

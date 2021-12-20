@@ -1,17 +1,18 @@
-#include "hpDiv.h"
+#include "hpA.h"
 
 #include <stdlib.h>
 
-HPNode *rawHpDiv(HpDivProps *props, HPChildren children) {
+HPNode *rawHpA(HpAProps *props, HPChildren children) {
     HPAttributeMap attributes = hpCreateAttributeMap();
 
     hpSet(&attributes, "class", props->class);
     hpSet(&attributes, "style", props->style);
+    hpSet(&attributes, "href", props->href);
 
     HPNode *node = malloc(sizeof(HPNode));
 
     *node = (HPNode){
-            .name = "div",
+            .name = "a",
             .children = children,
             .kind = HP_TAG,
             .attributes = attributes,
@@ -20,4 +21,4 @@ HPNode *rawHpDiv(HpDivProps *props, HPChildren children) {
     return node;
 }
 
-HPElement hpDiv = (HPElement) rawHpDiv;
+HPElement hpA = (HPElement) rawHpA;

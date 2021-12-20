@@ -4,12 +4,6 @@
 #include "hp.h"
 #include "input.h"
 
-typedef struct {
-    char *shopTitle;
-    int productCount;
-    Product *products;
-} AppProps;
-
 extern HPElement App;
 
 #endif

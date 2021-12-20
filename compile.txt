@@ -1,0 +1,5 @@
+Install required tools from REQUIREMENTS.txt
+Run `cmake -B cmake-build-debug -DCMAKE_C_COMPILER=<Preffered C compiler> -G "Unix Makefiles"` (From project root directory)
+Run `cmake --build cmake-build-debug`
+Run `shop.exe` file from cmake-build-debug directory
+

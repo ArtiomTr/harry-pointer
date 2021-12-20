@@ -1,8 +1,11 @@
 #include "input.h"
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "integrated.h"
 
 const int MAX_RETRY_COUNT = 5;
 
@@ -40,7 +43,39 @@ void scanTitle(FILE *input, char *output, const char *prefix) {
         trimString(output);
         if(strlen(output) == 0) {
             printf("Input cannot be empty\n");
-        } else {
+        } else if(validate_name_OR_surname(output)) {
+            return;
+        }
+        clearBuffer(input);
+    }
+    printf("Too many attempts\n");
+    exit(1);
+}
+
+void scanPhone(FILE *input, char *output, const char *prefix) {
+    for(int i = 0; i < MAX_RETRY_COUNT; ++i) {
+        printf("%s", prefix);
+        fscanf(input, "%30[^\n]", output);
+        trimString(output);
+        if(strlen(output) == 0) {
+            printf("Input cannot be empty\n");
+        } else if(validate_phone_number(output)) {
+            return;
+        }
+        clearBuffer(input);
+    }
+    printf("Too many attempts\n");
+    exit(1);
+}
+
+void scanEmail(FILE *input, char *output, const char *prefix) {
+    for(int i = 0; i < MAX_RETRY_COUNT; ++i) {
+        printf("%s", prefix);
+        fscanf(input, "%30[^\n]", output);
+        trimString(output);
+        if(strlen(output) == 0) {
+            printf("Input cannot be empty\n");
+        } else if(validate_email(output)) {
             return;
         }
         clearBuffer(input);
@@ -72,7 +107,13 @@ ShopInfo readUserInput(FILE *file) {
     ShopInfo sInfo;
 
     sInfo.shopTitle = calloc(30, sizeof(char));
-    scanTitle(file, sInfo.shopTitle, "Shop Title: ");
+    sInfo.contactPhone = calloc(30, sizeof(char));
+    sInfo.contactEmail = calloc(30, sizeof(char));
+    printf("Please, enter information about your shop.\n"
+           "Shop title, contact email, phone, and product titles should not be longer than 30 characters.\n");
+    scanTitle(file, sInfo.shopTitle, "Shop title: ");
+    scanEmail(file, sInfo.contactEmail, "Contact email: ");
+    scanPhone(file, sInfo.contactPhone, "Contact phone: ");
     scanPositiveInt(file, &(sInfo.productCount), "Product Count: ");
     sInfo.products = calloc(sInfo.productCount, sizeof(Product));
     for(int i = 0; i < sInfo.productCount; ++i) {

@@ -1,5 +1,6 @@
 #include "app.h"
 
+#include "footer.h"
 #include "header.h"
 #include "productGrid.h"
 
@@ -8,7 +9,26 @@ const char globalStyle[] = "html, body {"
                            "    margin: 0;"
                            "    padding: 0;"
                            "    background-color: #F0F3EC;"
-                           "    font-family: Poppins sans-serif;"
+                           "    min-height: 100vh;"
+                           "    font-family: 'Poppins', sans-serif;"
+                           "}"
+                           "body {"
+                           "    display: flex;"
+                           "    flex-direction: column;"
+                           "}"
+                           "footer {"
+                           "    background-color: #4F6F78;"
+                           "    display: flex;"
+                           "    justify-content: center;"
+                           "    align-items: center;"
+                           "    padding: 15px 0;"
+                           "}"
+                           ".footer__container {"
+                           "    width: 600px;"
+                           "    color: #fff;"
+                           "}"
+                           ".footer__container a {"
+                           "    color: #ffffff;"
                            "}"
                            ".header {"
                            "    position: sticky;"
@@ -27,6 +47,7 @@ const char globalStyle[] = "html, body {"
                            "    margin: 20px 0;"
                            "    display: flex;"
                            "    justify-content: center;"
+                           "    flex: 1;"
                            "}"
                            ".content {"
                            "    width: 600px;"
@@ -50,7 +71,7 @@ const char globalStyle[] = "html, body {"
                            "    color: #878787;"
                            "}";
 
-HPNode *AppComponent(AppProps *props, HPChildren children) {
+HPNode *AppComponent(ShopInfo *props, HPChildren children) {
     return createHPNode(
             hpHtml,
             ((HpHtmlProps){.lang = "en"}),
@@ -64,13 +85,13 @@ HPNode *AppComponent(AppProps *props, HPChildren children) {
                                       ((HpLinkProps){
                                               .rel = "preconnect",
                                               .href = "https://fonts.gstatic.com",
-                                              .crossOrigin = "true",
+                                              .crossOrigin = "anonymous",
                                       }),
                                       NULL),
                          createHPNode(hpLink,
                                       ((HpLinkProps){
                                               .rel = "stylesheet",
-                                              .href = fontUrl,
+                                              .href = (char *) fontUrl,
                                       }),
                                       NULL),
                          createHPNode(hpTitle, ((HpTitleProps){}), createHPString(props->shopTitle)),
@@ -91,7 +112,13 @@ HPNode *AppComponent(AppProps *props, HPChildren children) {
                                                                         .productCount = props->productCount,
                                                                         .products = props->products,
                                                                 }),
-                                                                NULL)))));
+                                                                NULL)))),
+            createHPNode(AppFooter,
+                         ((AppFooterProps){
+                                 .contactPhone = props->contactPhone,
+                                 .contactEmail = props->contactEmail,
+                         }),
+                         NULL));
 }
 
 HPElement App = (HPElement) AppComponent;
