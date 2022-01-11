@@ -63,9 +63,12 @@ int validate_email(char email[]) {
         return 0;
     }
 
-    if(eta_counter != 1) {
-        return 0;
-    }
+    // Original code modified: condition removed, because of it function
+    //   not printed error for strings not containing "@"
+
+    // if(eta_counter != 1) {
+    //     return 0;
+    // }
 
     // turi buti tik vienas @
     if(eta_counter == 1) {
